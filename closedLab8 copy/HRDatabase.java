@@ -55,36 +55,32 @@ public class HRDatabase {
 			System.out.println("Choose: \n1.Create\n2.Update\n3.Delete\n4.Select");
 			
 			int ch = scannerObject.nextInt();
-			switch(ch) {
 			
-			case 1:
-				// check if user can create and insert records
-				if (DBUser.canCreate) {			
-					System.out.println("FOR INSERTION: Enter the follwoing data:\n1.Name\n2.Employee id\n3.Phone Number\n4.City");
-					InsertClass insertObj = new InsertClass(con);
-					
-					try {
+			try {
+				switch(ch) {
+				
+				case 1:
+					// check if user can create and insert records
+					if (DBUser.canCreate) {			
+						System.out.println("FOR INSERTION: Enter the follwoing data:\n1.Name\n2.Employee id\n3.Phone Number\n4.City");
+						InsertClass insertObj = new InsertClass(con);
+						
 						insertObj.setEmpName(scannerObject.next());
 						insertObj.setEmpId(scannerObject.nextInt());
 						insertObj.setPhoneNum(scannerObject.next());
 						insertObj.setCity(scannerObject.next());
 						insertObj.insertFullRecord();				
 					}
-					catch (Exception e) {
-						System.out.println(e.getMessage());
+					else {
+						System.out.println("You do not have the required perms");		
 					}
-				}
-				else {
-					System.out.println("You do not have the required perms");		
-				}
-				break;
-			case 2:
-				// check if user can update and update records
-				if (DBUser.canUpdate) {
-					System.out.println("FOR UPDATION: Enter the follwoing data:\n1.Name\n2.Phone Number\n3.City\n4.Select ID");
-					UpdateClass updateObj = new UpdateClass(con);
-					
-					try {
+					break;
+				case 2:
+					// check if user can update and update records
+					if (DBUser.canUpdate) {
+						System.out.println("FOR UPDATION: Enter the follwoing data:\n1.Name\n2.Phone Number\n3.City\n4.Select ID");
+						UpdateClass updateObj = new UpdateClass(con);
+						
 						updateObj.setEmpName(scannerObject.next());
 						updateObj.setPhoneNum(scannerObject.next());
 						updateObj.setCity(scannerObject.next());
@@ -92,42 +88,36 @@ public class HRDatabase {
 						
 						updateObj.updateRecord();				
 					}
-					catch (Exception e) {
-						System.out.println(e.getMessage());
+					else {
+						System.out.println("You do not have the req perms");
 					}
-				}
-				else {
-					System.out.println("You do not have the req perms");
-				}
-				break;
-			case 3:
-				// check if user can delete and delete records
-				if (DBUser.canDelete) {
-					System.out.println("FOR DELETION: Enter the data:\n1.Employee ID");
-					DeleteClass deleteObj = new DeleteClass(con);
-					
-					try {
+					break;
+				case 3:
+					// check if user can delete and delete records
+					if (DBUser.canDelete) {
+						System.out.println("FOR DELETION: Enter the data:\n1.Employee ID");
+						DeleteClass deleteObj = new DeleteClass(con);
+						
 						deleteObj.setEmpId(scannerObject.nextInt());
 						deleteObj.deleteRecord();				
 					}
-					catch (Exception e) {
-						System.out.println(e.getMessage());
+					else {
+						System.out.println("You do not have the req perms");
+					}
+					break;
+				case 4:
+					// print all records
+					if (DBUser.canSelect) {
+						SelectClass selectObj = new SelectClass(con);
+						selectObj.selectAllRecord();
+					}
+					else {
+						System.out.println("You do not have the req perms");
 					}
 				}
-				else {
-					System.out.println("You do not have the req perms");
-				}
-				break;
-			case 4:
-				// print all records
-				if (DBUser.canSelect) {
-					SelectClass selectObj = new SelectClass(con);
-					selectObj.selectAllRecord();
-				}
-				else {
-					System.out.println("You do not have the req perms");
-				}
-				
+			}
+			catch(Exception e) {
+				System.out.println(e.getMessage());
 			}
 		}
 		scannerObject.close();
