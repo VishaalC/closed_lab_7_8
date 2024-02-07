@@ -10,10 +10,9 @@ import java.util.Scanner;
  * Program to implement a paintbrush and paint containers using generics and annotations
  * @author vishaalc
  */
-
 public class PaintBrushContainer {
 	public static void main(String[] args) {
-		Scanner scan = new Scanner(System.in);
+	Scanner scan = new Scanner(System.in);
         System.out.println("Choose patient: \n1.Red Paint\n2.Blue Paint\n3.Green Paint\n4.DryAir");
         int choice = scan.nextInt();
 		switch(choice) {
@@ -76,6 +75,7 @@ class PaintBrush<T> {
 	
 }
 
+// class to create the actual objects
 class PaintBrushCreator {
 	static public <T> void createPaintBrush(T obj) {
 		try {
