@@ -28,10 +28,16 @@ public class PaintBrushContainer {
 			break;
 		case 4:
 			PaintBrushCreator.createPaintBrush(new DryAirContainer());
+			break;
+		default:
+			System.out.println("Enter a valid option.");
+			break;
 		}
 		scan.close();
 	}
+
 }
+
 // paintbrush class
 class PaintBrush<T> {
 	private String name;
@@ -123,6 +129,7 @@ class GreenPaint {
 	String name;
 	int quantity;
 
+	
 	public void doFunction() {
 		System.out.println("Painting the town green");
 	}
@@ -147,6 +154,7 @@ class WaterContainer {
 	String name;
 	int quantity;
 
+	
 	public void doFunction() {
 		System.out.println("Painting the town with water?");
 	}

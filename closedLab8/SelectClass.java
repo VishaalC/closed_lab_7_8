@@ -4,17 +4,24 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-//class for selecing all records
+/**
+ * Class used to perform selection operation.
+ * 
+ */
 public class SelectClass {
-	Connection con;
+	Connection connectionObject;
 	
-	SelectClass(Connection con) {
-		this.con=con;
+	// instatiate connection object.
+	SelectClass(Connection connectionObject) {
+		this.connectionObject=connectionObject;
 	}
+	
+	// prepared statment
 	String selectAll = "SELECT * FROM EMP_INFO";
 	
+	// execute select statement.
 	public void selectAllRecord() throws Exception{
-		PreparedStatement selectStmt = con.prepareStatement(selectAll);
+		PreparedStatement selectStmt = connectionObject.prepareStatement(selectAll);
 		
 		ResultSet rs = selectStmt.executeQuery();
 		while(rs.next()) {

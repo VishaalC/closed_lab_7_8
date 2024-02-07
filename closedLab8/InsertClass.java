@@ -4,9 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-//class for inserting records
+/**
+ * Class for inserting records 
+ * Contains getters and setters and performs type checking
+ */
 public class InsertClass {
-	Connection con;
+	Connection connectionObject;
 	
 	String empName;
 	int empId;
@@ -14,14 +17,16 @@ public class InsertClass {
 	String City;
 	
 	// instatiating connection object
-	InsertClass(Connection con) {
-		this.con=con;
+	InsertClass(Connection connectionObject) {
+		this.connectionObject=connectionObject;
 	}
 	
+	// getter for empaName
 	public String getEmpName() {
 		return empName;
 	}
 	
+	// setter for empName 
 	public void setEmpName(String empName) throws Exception {
 		if (!empName.matches(".*[a-zA-Z]+.*") ) {
 			throw new Exception("Enter valid emp name");
@@ -29,18 +34,22 @@ public class InsertClass {
 		this.empName = empName;
 	}
 	
+	// getter for empId
 	public int getEmpId() {
 		return empId;
 	}
 	
+	// setter for empId
 	public void setEmpId(int empId) {
 		this.empId = empId;
 	}
 	
+	// getter for phoneNum
 	public String getPhoneNum() {
 		return phoneNum;
 	}
 	
+	// setter for phoneNum
 	public void setPhoneNum(String phoneNum) throws Exception {	
 		if (phoneNum.length() > 9) {
 			throw new Exception("Phone number length cannot be greater than 9");
@@ -48,10 +57,12 @@ public class InsertClass {
 		this.phoneNum = phoneNum;
 	}
 	
+	// gettter for city
 	public String getCity() {
 		return City;
 	}
 	
+	// setter for city
 	public void setCity(String city) throws Exception {
 		if (!city.matches(".*[a-zA-Z]+.*")) {
 			throw new Exception("Enter valid city");
@@ -64,7 +75,7 @@ public class InsertClass {
 	
 	// method to set the prepared statement and executre
 	public void insertFullRecord() throws SQLException {
-		PreparedStatement insertStatement = con.prepareStatement(insertRecord);
+		PreparedStatement insertStatement = connectionObject.prepareStatement(insertRecord);
 		insertStatement.setString(1, this.getEmpName());
 		insertStatement.setInt(2, this.getEmpId());
 		insertStatement.setString(3, this.getPhoneNum());

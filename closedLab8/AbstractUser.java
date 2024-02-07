@@ -1,5 +1,8 @@
 package closedLab8;
 
+/**
+ * Abstract class used to create employee and HR objects.
+ */
 public abstract class AbstractUser {
    
 	public boolean canCreate;
